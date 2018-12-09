@@ -1,7 +1,7 @@
 INCLUDES := 
 LIBRARIES := 
 LIBS := 
-CXXFLAGS := -O3 -fPIC -g -Wall -Werror $(INCLUDES) $(LIBRARIES) $(LIBS)
+CXXFLAGS := -O3 -fPIC -g -Wall  $(INCLUDES) $(LIBRARIES) $(LIBS)
 CXX := g++
 #CXX := arm-unknown-linux-gnueabi-g++
 MAJOR := 0
@@ -19,6 +19,9 @@ lib$(NAME).so: lib$(NAME).so.$(VERSION)
 
 lib$(NAME).so.$(VERSION): $(NAME).o
 	$(CXX) -pg -shared -Wl,-soname,lib$(NAME).so.$(MAJOR) $^ -o $@
+
+libDS18B20: $(NAME).o 
+	$(CXX) -pg -shared $^ -o lib$(NAME).a
 
 clean:
 	$(RM) *.o *.so* 
